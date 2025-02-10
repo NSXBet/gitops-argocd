@@ -1,3 +1,4 @@
+# More info: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
 global:
   scrape_interval: 5m
   scrape_timeout: 30s
