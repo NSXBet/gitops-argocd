@@ -41,47 +41,47 @@ spec:
                 addonChartVersion: 1.24.2
   template:
     metadata:
-      name: addon-{{name}}-{{values.addonChart}}
+      name: addon-{{.name}}-{{.values.addonChart}}
     spec:
       project: default
       sources:
-        - repoURL: '{{metadata.annotations.addons_repo_url}}'
-          targetRevision: '{{metadata.annotations.addons_repo_revision}}'
+        - repoURL: '{{.metadata.annotations.addons_repo_url}}'
+          targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
         # See: https://artifacthub.io/packages/helm/istio-official/istiod
         #
         # Install the Istio base chart which contains cluster-wide Custom Resource Definitions (CRDs)
         # which must be installed prior to the deployment of the Istio control plane
         - chart: base
-          repoURL: '{{values.addonChartRepository}}'
-          targetRevision: '{{values.addonChartVersion}}'
+          repoURL: '{{.values.addonChartRepository}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
             releaseName: istio-base
             ignoreMissingValueFiles: true
             valueFiles:
-              - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/base-values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/base-values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}environments/default/addons/{{values.addonChart}}/base-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/default/addons/{{.values.addonChart}}/base-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/addons/{{.values.addonChart}}/base-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/clusters/{{.name}}/addons/{{.values.addonChart}}/base-values.yaml
             values: |
               defaultRevision: default
               istioNamespace: {{values.addonChartRepositoryNamespace}}
         # Install the Istio discovery chart which deploys the istiod service
         - chart: istiod
-          repoURL: '{{values.addonChartRepository}}'
-          targetRevision: '{{values.addonChartVersion}}'
+          repoURL: '{{.values.addonChartRepository}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
             releaseName: istiod
             ignoreMissingValueFiles: true
             valueFiles:
-              - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/istiod-values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/istiod-values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}environments/default/addons/{{values.addonChart}}/istiod-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/default/addons/{{.values.addonChart}}/istiod-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/addons/{{.values.addonChart}}/istiod-values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/clusters/{{.name}}/addons/{{.values.addonChart}}/istiod-values.yaml
             values: |
               global:
-                istioNamespace: {{values.addonChartRepositoryNamespace}}
+                istioNamespace: {{.values.addonChartRepositoryNamespace}}
       destination:
-        namespace: '{{values.addonChartRepositoryNamespace}}'
-        name: '{{name}}'
+        namespace: '{{.values.addonChartRepositoryNamespace}}'
+        name: '{{.name}}'
       syncPolicy:
         automated: {}
         syncOptions:
