@@ -4,6 +4,7 @@ kind: ApplicationSet
 metadata:
   name: addons-prometheus
 spec:
+  goTemplate: true
   syncPolicy:
     preserveResourcesOnDeletion: true
   generators:

@@ -4,6 +4,7 @@ kind: ApplicationSet
 metadata:
   name: addons-aws-karpenter
 spec:
+  goTemplate: true
   syncPolicy:
     preserveResourcesOnDeletion: true
   generators:

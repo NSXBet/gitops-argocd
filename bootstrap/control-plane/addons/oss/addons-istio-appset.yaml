@@ -6,6 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
+  goTemplate: true
   syncPolicy:
     preserveResourcesOnDeletion: true
   generators:
@@ -64,7 +65,7 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/clusters/{{.name}}/addons/{{.values.addonChart}}/base-values.yaml
             values: |
               defaultRevision: default
-              istioNamespace: {{values.addonChartRepositoryNamespace}}
+              istioNamespace: {{.values.addonChartRepositoryNamespace}}
         # Install the Istio discovery chart which deploys the istiod service
         - chart: istiod
           repoURL: '{{.values.addonChartRepository}}'
