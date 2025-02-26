@@ -65,6 +65,7 @@ spec:
               domainFilters: {{.metadata.annotations.external_dns_domain_filters}}
               txtOwnerId: {{.metadata.annotations.aws_cluster_name}}
               policy: {{default "upsert-only" .metadata.annotations.external_dns_policy}}
+              sources: ["service", "ingress", "istio-virtualservice"]
       destination:
         namespace: '{{.metadata.annotations.external_dns_namespace}}'
         name: '{{.name}}'
