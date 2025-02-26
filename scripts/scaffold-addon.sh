@@ -54,12 +54,12 @@ spec:
                 addonChartVersion: ${CHART_VERSION}
   template:
     metadata:
-      name: addon-{{name}}-{{values.addonChart}}
+      name: addon-{{.name}}-{{.values.addonChart}}
     spec:
       project: default
       sources:
-        - repoURL: '{{metadata.annotations.addons_repo_url}}'
-          targetRevision: '{{metadata.annotations.addons_repo_revision}}'
+        - repoURL: '{{.metadata.annotations.addons_repo_url}}'
+          targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
         - chart: ${ADDON_NAME}
           repoURL: '{{values.addonChartRepository}}'
@@ -68,12 +68,12 @@ spec:
             releaseName: ${ADDON_NAME}
             ignoreMissingValueFiles: true
             valueFiles:
-              - \$values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/values.yaml
-              - \$values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
-              - \$values/{{metadata.annotations.addons_repo_basepath}}environments/default/addons/{{values.addonChart}}/values.yaml
+              - \$values/{{.metadata.annotations.addons_repo_basepath}}environments/default/addons/{{.values.addonChart}}/values.yaml
+              - \$values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/addons/{{.values.addonChart}}/values.yaml
+              - \$values/{{.metadata.annotations.addons_repo_basepath}}environments/clusters/{{.name}}/addons/{{.values.addonChart}}/values.yaml
       destination:
-        namespace: '{{values.addonChartRepositoryNamespace}}'
-        name: '{{name}}'
+        namespace: '{{.values.addonChartRepositoryNamespace}}'
+        name: '{{.name}}'
       syncPolicy:
         automated: {}
         syncOptions:
