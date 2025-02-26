@@ -66,6 +66,9 @@ spec:
               txtOwnerId: {{.metadata.annotations.aws_cluster_name}}
               policy: {{default "upsert-only" .metadata.annotations.external_dns_policy}}
               sources: ["service", "ingress", "istio-virtualservice"]
+              extraArgs:
+                - --aws-api-retries=3
+                - --aws-batch-change-size=1000
       destination:
         namespace: '{{.metadata.annotations.external_dns_namespace}}'
         name: '{{.name}}'
