@@ -20,6 +20,7 @@ kind: ApplicationSet
 metadata:
   name: addons-${ADDON_NAME}
 spec:
+  goTemplate: true
   syncPolicy:
     preserveResourcesOnDeletion: true
   generators:
