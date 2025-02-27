@@ -1,0 +1,5 @@
+service:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:010928222984:certificate/c6cfb481-6d60-4f1d-91a6-8eade495bf0f
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
