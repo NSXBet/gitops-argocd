@@ -5,8 +5,7 @@ global:
   evaluation_interval: 5m
 
 server:
-  extraArgs:
-    storage.local.retention: 168h
+  retention: "7d"
 
   persistentVolume:
     enabled: true
