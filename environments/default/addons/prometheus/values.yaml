@@ -15,10 +15,13 @@ server:
   podLabels:
     sidecar.istio.io/inject: "false"
 
+  statefulSet:
+    enabled: true
+
   resources:
     requests:
       cpu: 500m
-      memory: 4Gb
+      memory: 4Gi
     limits:
       cpu: 1000m
       memory: 7Gi
