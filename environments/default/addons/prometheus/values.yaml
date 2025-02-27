@@ -13,7 +13,7 @@ server:
     size: 100Gi
 
   podLabels:
-    sidecar.istio.io/inject: "false"
+    sidecar.istio.io/inject: 'false'
 
   statefulSet:
     enabled: true
