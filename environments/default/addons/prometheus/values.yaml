@@ -15,9 +15,6 @@ server:
   podLabels:
     sidecar.istio.io/inject: "false"
 
-  statefulSet:
-    enabled: true
-
   resources:
     requests:
       cpu: 500m
