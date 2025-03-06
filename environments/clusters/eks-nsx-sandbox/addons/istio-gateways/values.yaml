@@ -1,4 +1,9 @@
 gateways:
+  - name: public
+    enabled: true
+    ingressName: public
+    domains:
+    - fqdn: '*.sbx.nsx.services'
   - name: internal
     enabled: true
     ingressName: internal
