@@ -20,8 +20,8 @@ resources:
 service:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:492684252576:certificate/1df12f14-ad70-480e-bf15-368fc6e07ae6
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+    # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <cert-arn>
     # service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: SecurePolicy
 
 # HPA for the ingress gateway
