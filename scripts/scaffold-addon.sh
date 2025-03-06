@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Check if all required arguments are provided
-if [ "$#" -ne 4 ]; then
-    echo "Usage: $0 <addon-name> <chart-repo> <chart-version> <namespace>"
+if [ "$#" -ne 5 ]; then
+    echo "Usage: $0 <addon-name> <chart-repo> <chart-version> <namespace> <addon-type>"
     exit 1
 fi
 
@@ -10,7 +10,14 @@ ADDON_NAME=$1
 CHART_REPO=$2
 CHART_VERSION=$3
 NAMESPACE=$4
-OUTPUT_FILE="bootstrap/control-plane/addons/oss/addons-${ADDON_NAME}-appset.yaml"
+ADDON_TYPE=$5
+OUTPUT_FILE="bootstrap/control-plane/addons/${ADDON_TYPE}/addons-${ADDON_NAME}-appset.yaml"
+
+# Validate addon type
+if [ "${ADDON_TYPE}" != "oss" ] && [ "${ADDON_TYPE}" != "aws" ] && [ "${ADDON_TYPE}" != "nsx" ]; then
+    echo "Invalid addon type. Must be one of: oss, aws, nsx"
+    exit 1
+fi
 
 # Create the ApplicationSet YAML
 cat > "$OUTPUT_FILE" << EOF
