@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  istio-gateways:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-03-06T13:46:09.861402038Z"
+    description: A Helm chart for Istio Gateways
+    digest: bc3c63f96d90bde538286f96f54f114c43b18d11c0b67771303cb70a4cb1efce
+    name: istio-gateways
+    type: application
+    urls:
+    - istio-gateways-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-03-06T13:46:09.861407397Z"
