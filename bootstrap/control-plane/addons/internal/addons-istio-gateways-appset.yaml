@@ -14,7 +14,7 @@ spec:
           - clusters:
               values:
                 addonChart: istio-gateways
-                addonChartVersion: istio-gateways-0.1.0
+                addonChartVersion: HEAD
                 addonChartRepositoryNamespace: istio-system
                 addonChartRepository: git@github.com:NSXBet/gitops-argocd.git
               selector:
