@@ -77,8 +77,8 @@ spec:
           targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
         - ${ADDON_CHART_SOURCE}
-          repoURL: '{{values.addonChartRepository}}'
-          targetRevision: '{{values.addonChartVersion}}'
+          repoURL: '{{.values.addonChartRepository}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
             releaseName: ${ADDON_NAME}
             ignoreMissingValueFiles: true

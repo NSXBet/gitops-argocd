@@ -47,8 +47,8 @@ spec:
           targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
         - path: 'charts/{{.values.addonChart}}'
-          repoURL: '{{values.addonChartRepository}}'
-          targetRevision: '{{values.addonChartVersion}}'
+          repoURL: '{{.values.addonChartRepository}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
             releaseName: istio-gateways
             ignoreMissingValueFiles: true
