@@ -14,9 +14,16 @@ ADDON_TYPE=$5
 OUTPUT_FILE="bootstrap/control-plane/addons/${ADDON_TYPE}/addons-${ADDON_NAME}-appset.yaml"
 
 # Validate addon type
-if [ "${ADDON_TYPE}" != "oss" ] && [ "${ADDON_TYPE}" != "aws" ] && [ "${ADDON_TYPE}" != "nsx" ]; then
-    echo "Invalid addon type. Must be one of: oss, aws, nsx"
+if [ "${ADDON_TYPE}" != "oss" ] && [ "${ADDON_TYPE}" != "aws" ] && [ "${ADDON_TYPE}" != "internal" ]; then
+    echo "Invalid addon type. Must be one of: oss, aws, internal"
     exit 1
+fi
+
+# Check if the addon uses a chart from this repository. The CHART_REPO is the URL of the repository.
+if [[ "${CHART_REPO}" == "git@github.com:NSXBet/gitops-argocd.git" ]]; then
+    ADDON_CHART_SOURCE="path: charts/${ADDON_NAME}"
+else
+    ADDON_CHART_SOURCE="chart: ${ADDON_NAME}"
 fi
 
 # Create the ApplicationSet YAML
@@ -69,7 +76,7 @@ spec:
         - repoURL: '{{.metadata.annotations.addons_repo_url}}'
           targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
-        - chart: ${ADDON_NAME}
+        - ${ADDON_CHART_SOURCE}
           repoURL: '{{values.addonChartRepository}}'
           targetRevision: '{{values.addonChartVersion}}'
           helm:
