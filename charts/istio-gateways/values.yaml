@@ -1,0 +1,23 @@
+namespace: 'istio-system'
+
+gateways: # []
+  - name: public
+    enabled: true
+    ingressName: public
+    domains:
+      - fqdn: 'example.com'
+      - fqdn: '*.example.com'
+  - name: internal
+    enabled: false
+    namespace: istio-system
+    selector:
+      app: istio-internal-ingressgateway
+      istio: istio-internal-ingressgateway
+    domains:
+      - fqdn: 'mycustomdomain.com'
+        port: 3000
+        protocol: TCP
+        httpsRedirect: true
+        tls:
+          mode: ISTIO_MUTUAL
+          certSecret: my-cert-secret

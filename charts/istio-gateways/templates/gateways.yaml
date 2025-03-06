@@ -1,0 +1,8 @@
+{{/*
+Create Istio Gateways for each gateway in the values.gateways array.
+*/}}
+{{- range $gateways := .Values.gateways }}
+  {{- $contexts := dict "Gateway" $gateways "General" $.Values }}
+  {{- include "istio-gateways.gateway" $contexts }}
+{{ printf "---"}}
+{{- end }}
