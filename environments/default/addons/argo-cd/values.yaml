@@ -1,3 +1,7 @@
+configs:
+  params:
+    server.insecure: true
+
 controller:
   replicas: 1 # Additional replicas will cause sharding of managed clusters across number of replicas.
   metrics:
@@ -51,10 +55,7 @@ server:
       annotations:
         prometheus.io/scrape: true
   service:
-    type: LoadBalancer
-    annotations:
-      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
-      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    type: ClusterIP
 
 configs:
   repositories:
