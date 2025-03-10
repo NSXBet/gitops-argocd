@@ -1,7 +1,3 @@
-configs:
-  params:
-    server.insecure: true
-
 controller:
   replicas: 1 # Additional replicas will cause sharding of managed clusters across number of replicas.
   metrics:
@@ -58,6 +54,8 @@ server:
     type: ClusterIP
 
 configs:
+  params:
+    server.insecure: true
   repositories:
     # Required when using helm repository with oci formal like karpenter and aws-gateway-api-controller
     aws-public-ecr:
